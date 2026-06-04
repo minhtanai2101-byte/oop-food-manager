@@ -19,7 +19,8 @@ def handle_add_food(manager):
     available = input_available("Món còn bán hay hết bán: ")
     if available is None:
         return
-    new_food = Food(name, price, category, available)
+    new_id = manager.get_next_id()
+    new_food = Food(new_id, name, price, category, available)
     if manager.add_food(new_food):
         manager.save_to_json(DATA_FILE)
         print("Đã thêm món và lưu dữ liệu")

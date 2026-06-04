@@ -93,10 +93,15 @@ class FoodManager:
                 food_dicts = json.load(file)
             
             self.foods = []
-
-            for food_dict in food_dicts:
+            updated = False
+            for index, food_dict in enumerate(food_dicts,start=1):
+                if "id" not in food_dict:
+                    food_dict["id"] = index
+                    updated = True
                 food = Food.from_dict(food_dict)
                 self.foods.append(food)
+            if updated == True:
+                self.save_to_json(file_name)
             return True
         except FileNotFoundError:
             print("Chưa có file dữ liệu")
@@ -124,4 +129,13 @@ class FoodManager:
     def count_unavailable_foods(self):
         result = self.filter_by_available(available=False)
         return len(result)
+    
+    def get_next_id(self):
+        if len(self.foods) == 0:
+            return 1
+        max_id = self.foods[0].id     
+        for food in self.foods:
+            if food.id > max_id:
+                max_id = food.id
+        return max_id + 1
 

@@ -1,10 +1,12 @@
 class Food:
-    def __init__(self, name, price, category, available):
+    def __init__(self, id, name, price, category, available):
+        self.id = id
         self.name = name
         self.price = price
         self.category = category
         self.available = available
     def show_info(self):
+        print(f"ID: {self.id}")
         print(f"Tên: {self.name}")
         print(f"Giá: {self.price}")
         print(f"Loại món: {self.category}")
@@ -18,6 +20,7 @@ class Food:
         self.available = new_available
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "price": self.price,
             "category": self.category,
@@ -26,6 +29,7 @@ class Food:
     @staticmethod
     def from_dict(data):
         return Food(
+            data["id"],
             data["name"],
             data["price"],
             data["category"],

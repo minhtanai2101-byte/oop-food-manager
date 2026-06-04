@@ -1,41 +1,48 @@
 [
     {
+        "id": 1,
         "name": "Phở bò",
         "price": 50000,
         "category": "Món nước",
         "available": true
     },
     {
+        "id": 2,
         "name": "Cơm rang",
         "price": 45000,
         "category": "Món cơm",
         "available": true
     },
     {
+        "id": 3,
         "name": "Bún bò",
         "price": 40000,
         "category": "Món nước",
         "available": false
     },
     {
+        "id": 4,
         "name": "Mì xào",
         "price": 55000,
         "category": "Món xào",
         "available": true
     },
     {
+        "id": 5,
         "name": "Cháo",
         "price": 35000,
         "category": "Món phụ",
         "available": false
     },
     {
+        "id": 6,
         "name": "Quẩy",
         "price": 5000,
         "category": "Món phụ",
         "available": false
     },
     {
+        "id": 7,
         "name": "Bánh mì",
         "price": 20000,
         "category": "Món phụ",
