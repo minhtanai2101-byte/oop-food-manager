@@ -113,4 +113,15 @@ class FoodManager:
             if min_price <= food.price <= max_price:
                 result.append(food)
         return result
+    
+    def count_total_foods(self):
+        return len(self.foods)
+           
+    def count_available_foods(self):
+        result = self.filter_by_available(available=True)
+        return len(result)
+    
+    def count_unavailable_foods(self):
+        result = self.filter_by_available(available=False)
+        return len(result)
 

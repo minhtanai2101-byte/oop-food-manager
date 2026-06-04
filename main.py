@@ -9,7 +9,8 @@ from food_actions import (
     handle_sort_foods,
     handle_update_food_available,
     handle_update_food_price,
-    handle_filter_by_price_range
+    handle_filter_by_price_range,
+    handle_show_statistic
 ) 
 
 def print_menu(menu):
@@ -31,6 +32,7 @@ def main():
             "Lọc theo trạng thái",
             "Sắp xếp món",
             "Lọc theo khoảng giá",
+            "Thống kê món ăn",
             "Thoát"]
 
     while True:
@@ -42,8 +44,8 @@ def main():
             print("Chỉ nhập số")
             continue
             
-        if choice not in range(1,12):
-            print("Chỉ nhập số từ 1 đến 11")
+        if choice not in range(1,13):
+            print("Chỉ nhập số từ 1 đến 12")
         
         elif choice == 1:
             print("Danh sách món ăn")
@@ -75,7 +77,9 @@ def main():
 
         elif choice == 10:
             handle_filter_by_price_range(manager)
-
+        
+        elif choice == 11:
+            handle_show_statistic(manager) 
         else:
             break
 

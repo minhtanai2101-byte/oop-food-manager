@@ -129,3 +129,12 @@ def handle_filter_by_price_range(manager):
             print(f"{i}.")
             food.show_info()
             print("-"*20)
+
+def handle_show_statistic(manager):
+    total =  manager.count_total_foods()
+    total_true = manager.count_available_foods()
+    total_false = manager.count_unavailable_foods()
+    print("----THỐNG KÊ MÓN ĂN----")
+    print(f"Tổng số món: {total}")
+    print(f"Số món còn bán: {total_true}")
+    print(f"Số món hết bán: {total_false}")
