@@ -55,3 +55,5 @@ python main.py
 - Xử lý lỗi bằng try/except
 - Kiểm tra chuẩn hóa dữ liệu đầu vào
 - Tách code thành nhiều file
+## Tác giả
+- Minh Tan AI
