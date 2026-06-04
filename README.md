@@ -2,6 +2,7 @@
 ## 1. Giới thiệu
 - Đây là project quản lý danh sách món ăn bằng Python.
 - Project sử dụng lập trình hướng đối tượng OOP, lưu dữ liệu bằng file JSON, và chạy bằng menu trong terminal.
+- Project này được hình thành trong quá trình học lập trình Python OOP.
 ## 2. Chức năng chính
 - Xem danh sách món ăn
 - Thêm món ăn mới
