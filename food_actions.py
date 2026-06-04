@@ -56,7 +56,7 @@ def handle_update_food_price(manager):
 
 def handle_update_food_available(manager):
     food_name = input("Nhập tên món muốn sửa trạng thái: ").strip()
-    new_available = input_available("Nhập trạng thái còn bán hay hết bán: ").strip()
+    new_available = input_available("Nhập trạng thái còn bán hay hết bán: ")
     if new_available is None:
         return
    
@@ -117,12 +117,15 @@ def handle_filter_by_price_range(manager):
     max_price = input_positive_int("Nhập giá max: ")
     if max_price is None:
         return
+    if min_price > max_price:
+        print("Giá min không được lớn hơn giá max")
+        return
     result = manager.filter_by_price_range(min_price, max_price)
     if len(result) == 0:
         print("Không tìm thấy món phù hợp")
     else:
         print("Danh sách các món phù hợp:")
         for i, food in enumerate(result,start=1):
-            print(f"{i}")
+            print(f"{i}.")
             food.show_info()
             print("-"*20)
