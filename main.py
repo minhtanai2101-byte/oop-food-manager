@@ -8,7 +8,8 @@ from food_actions import (
     handle_filter_by_available,
     handle_sort_foods,
     handle_update_food_available,
-    handle_update_food_price
+    handle_update_food_price,
+    handle_filter_by_price_range
 ) 
 
 def print_menu(menu):
@@ -20,7 +21,17 @@ def main():
     manager = FoodManager()
     manager.load_from_json(DATA_FILE)
 
-    menu = ["Xem danh sách món", "Thêm món", "Tìm món", "Xóa món", "Sửa giá món", "Sửa trạng thái món", "Lọc theo loại món", "Lọc theo trạng thái", "Sắp xếp món", "Thoát"]
+    menu = ["Xem danh sách món",
+            "Thêm món",
+            "Tìm món",
+            "Xóa món",
+            "Sửa giá món",
+            "Sửa trạng thái món",
+            "Lọc theo loại món",
+            "Lọc theo trạng thái",
+            "Sắp xếp món",
+            "Lọc theo khoảng giá",
+            "Thoát"]
 
     while True:
         print_menu(menu)
@@ -31,8 +42,8 @@ def main():
             print("Chỉ nhập số")
             continue
             
-        if choice not in range(1,11):
-            print("Chỉ nhập số từ 1 đến 10")
+        if choice not in range(1,12):
+            print("Chỉ nhập số từ 1 đến 11")
         
         elif choice == 1:
             print("Danh sách món ăn")
@@ -63,6 +74,9 @@ def main():
             handle_sort_foods(manager)
 
         elif choice == 10:
+            handle_filter_by_price_range(manager)
+
+        else:
             break
 
 if __name__ == "__main__":

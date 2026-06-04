@@ -109,3 +109,20 @@ def handle_sort_foods(manager):
         manager.show_all_foods()
     else:
         print("Chỉ nhập tên hoặc giá")
+
+def handle_filter_by_price_range(manager):
+    min_price = input_positive_int("Nhập giá min: ")
+    if min_price is None:
+        return
+    max_price = input_positive_int("Nhập giá max: ")
+    if max_price is None:
+        return
+    result = manager.filter_by_price_range(min_price, max_price)
+    if len(result) == 0:
+        print("Không tìm thấy món phù hợp")
+    else:
+        print("Danh sách các món phù hợp:")
+        for i, food in enumerate(result,start=1):
+            print(f"{i}")
+            food.show_info()
+            print("-"*20)

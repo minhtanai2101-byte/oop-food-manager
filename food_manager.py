@@ -106,3 +106,11 @@ class FoodManager:
             print("File dữ liệu bị lỗi")
             self.foods = []
             return False
+        
+    def filter_by_price_range(self, min_price, max_price):
+        result = []
+        for food in self.foods:
+            if min_price <= food.price <= max_price:
+                result.append(food)
+        return result
+
