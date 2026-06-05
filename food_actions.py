@@ -55,6 +55,19 @@ def handle_update_food_price(manager):
     else:
         print("Không tìm thấy món muốn sửa giá")
 
+def handle_update_food_price_by_id(manager):
+    food_id = input_positive_int("Nhập id món bạn muốn sửa giá: ")
+    if food_id is None:
+        return
+    new_price = input_positive_int("Nhập giá: ")
+    if new_price is None:
+        return
+    if manager.update_food_price_by_id(food_id, new_price):
+        manager.save_to_json(DATA_FILE)
+        print("Đã sửa giá món và lưu vào dữ liệu")
+    else:
+        print("Không tìm thấy ID món bạn muốn sửa giá")
+
 def handle_update_food_available(manager):
     food_name = input("Nhập tên món muốn sửa trạng thái: ").strip()
     new_available = input_available("Nhập trạng thái còn bán hay hết bán: ")
