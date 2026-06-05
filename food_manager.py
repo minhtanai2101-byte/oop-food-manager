@@ -82,6 +82,14 @@ class FoodManager:
             result.update_available(new_available)
             return True
     
+    def update_food_available_by_id(self, food_id, new_available):
+        result = self.find_food_by_id(food_id)
+        if result is None:
+            return False
+        else:
+            result.update_available(new_available)
+            return True
+        
     def to_dicts(self):
         result = []
         for food in self.foods:

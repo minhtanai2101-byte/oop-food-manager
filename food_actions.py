@@ -80,6 +80,19 @@ def handle_update_food_available(manager):
     else:
         print("Không tìm thấy món muốn sửa trạng thái")
 
+def handle_update_food_available_by_id(manager):
+    food_id = input_positive_int("Nhập ID món muốn sửa trạng thái: ")
+    if food_id is None:
+        return
+    new_available = input_available("Nhập trạng thái còn bán hay hết bán: ")
+    if new_available is None:
+        return
+    if manager.update_food_available_by_id(food_id, new_available):
+        manager.save_to_json(DATA_FILE)
+        print("Đã sửa trạng thái món và lưu vào dữ liệu")
+    else:
+        print("Không tìm thấy ID món muốn sửa trạng thái")
+
 def handle_filter_by_category(manager):
     category = input("Nhập loại món muốn lọc: ").strip()
     result = manager.filter_by_category(category)
