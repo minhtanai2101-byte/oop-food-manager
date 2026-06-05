@@ -35,17 +35,17 @@
         "available": false
     },
     {
-        "id": 6,
-        "name": "Quẩy",
-        "price": 5000,
-        "category": "Món phụ",
-        "available": false
-    },
-    {
         "id": 7,
         "name": "Bánh mì",
         "price": 20000,
         "category": "Món phụ",
         "available": true
+    },
+    {
+        "id": 8,
+        "name": "Quẩy",
+        "price": 5000,
+        "category": "Món phụ",
+        "available": false
     }
 ]

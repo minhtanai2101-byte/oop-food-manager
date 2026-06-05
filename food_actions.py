@@ -141,7 +141,7 @@ def handle_show_statistic(manager):
     print(f"Số món hết bán: {total_false}")
 
 def handle_find_food_by_id(manager):
-    food_id = input_positive_int("Nhập id món ăn muốn tìm: ")
+    food_id = input_positive_int("Nhập ID món ăn muốn tìm: ")
     if food_id is None:
         return
     result = manager.find_food_by_id(food_id)
@@ -150,3 +150,13 @@ def handle_find_food_by_id(manager):
     else:
         print("Món bạn cần tìm:")
         result.show_info()
+
+def handle_remove_food_by_id(manager):
+    food_id = input_positive_int("Nhập ID món muốn xóa: ")
+    if food_id is None:
+        return
+    if manager.remove_food_by_id(food_id):
+        manager.save_to_json(DATA_FILE)
+        print("Đã xóa món và lưu dữ liệu")
+    else:
+        print("Không tìm thấy ID món muốn xóa")

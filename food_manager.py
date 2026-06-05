@@ -144,4 +144,12 @@ class FoodManager:
             if food.id == food_id:
                 return food
         return None
+    
+    def remove_food_by_id(self, food_id):
+        result = self.find_food_by_id(food_id)
+        if result is None:
+            return False
+        else:
+            self.foods.remove(result)
+            return True
 
