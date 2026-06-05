@@ -4,16 +4,23 @@
 - Project sử dụng lập trình hướng đối tượng OOP, lưu dữ liệu bằng file JSON, và chạy bằng menu trong terminal.
 - Project này được hình thành trong quá trình học lập trình Python OOP.
 ## 2. Chức năng chính
+- Tự cập nhật thêm ID vào món trong dữ liệu cũ
+- Tự tạo ID cho món mới
 - Xem danh sách món ăn
 - Thêm món ăn mới
 - Không cho phép món trùng tên
 - Tìm món theo tên
 - Xóa món theo tên
-- Sửa giá món ăn
-- Sửa trạng thái món còn bán hay hết bán
+- Sửa giá món ăn theo tên
+- Sửa trạng thái theo tên món còn bán hay hết bán
+- Tìm món theo ID
+- Xóa món theo ID
+- Sửa giá món theo ID
+- Sửa trạng thái món theo ID
 - Lọc món theo loại món
 - Lọc món theo trạng thái món
 - Sắp xếp món theo tên hoặc giá
+- Thống kê số lượng món: tổng số món, số món còn bán, hết bán
 - Lưu dữ liệu vào file JSON
 - Đọc dữ liệu từ file JSON khi mở chương trình
 ## 3. Cấu trúc file
@@ -26,6 +33,7 @@ project/
 - input_helpers.py
 - config.py
 - oop_food.json
+- .gitignore
 ```
 ## 4. Ý nghĩa từng file
 - `main.py`: file chạy chính, hiển thị menu và điều phối chương trình
@@ -35,6 +43,7 @@ project/
 - `input_helpers.py`: chứa các hàm input hỗ trợ nhập liệu
 - `config.py`: chứa cấu hình chung như tên file dữ liệu
 - `oop_food.json`: file lưu dữ liệu món ăn.
+- `.gitignore`: khai báo các file/folder không đưa lên github
 ## 5. Cách chạy chương trình
 - Mở terminal tại thư mục project và chạy file:
 ```bash 
