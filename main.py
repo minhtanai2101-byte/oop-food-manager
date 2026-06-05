@@ -10,7 +10,8 @@ from food_actions import (
     handle_update_food_available,
     handle_update_food_price,
     handle_filter_by_price_range,
-    handle_show_statistic
+    handle_show_statistic,
+    handle_find_food_by_id
 ) 
 
 def print_menu(menu):
@@ -25,6 +26,7 @@ def main():
     menu = ["Xem danh sách món",
             "Thêm món",
             "Tìm món",
+            "Tìm món theo ID",
             "Xóa món",
             "Sửa giá món",
             "Sửa trạng thái món",
@@ -44,8 +46,8 @@ def main():
             print("Chỉ nhập số")
             continue
             
-        if choice not in range(1,13):
-            print("Chỉ nhập số từ 1 đến 12")
+        if choice not in range(1,14):
+            print("Chỉ nhập số từ 1 đến 13")
         
         elif choice == 1:
             print("Danh sách món ăn")
@@ -56,29 +58,32 @@ def main():
         
         elif choice == 3:
             handle_find_food(manager)
-        
+
         elif choice == 4:
+            handle_find_food_by_id(manager) 
+        
+        elif choice == 5:
             handle_remove_food(manager)
 
-        elif choice == 5:
+        elif choice == 6:
             handle_update_food_price(manager)
 
-        elif choice == 6:
+        elif choice == 7:
             handle_update_food_available(manager)
 
-        elif choice == 7:
+        elif choice == 8:
             handle_filter_by_category(manager)
         
-        elif choice == 8:
+        elif choice == 9:
             handle_filter_by_available(manager)
         
-        elif choice == 9:
+        elif choice == 10:
             handle_sort_foods(manager)
 
-        elif choice == 10:
+        elif choice == 11:
             handle_filter_by_price_range(manager)
         
-        elif choice == 11:
+        elif choice == 12:
             handle_show_statistic(manager) 
         else:
             break

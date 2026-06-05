@@ -5,7 +5,7 @@ def input_positive_int(message):
         print("Chỉ nhập số")
         return None
     if number <= 0:
-        print("Giá phải lớn hơn 0")
+        print("Chỉ nhập số lớn hơn 0")
         return None
     return number
 

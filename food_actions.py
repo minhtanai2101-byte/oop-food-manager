@@ -139,3 +139,14 @@ def handle_show_statistic(manager):
     print(f"Tổng số món: {total}")
     print(f"Số món còn bán: {total_true}")
     print(f"Số món hết bán: {total_false}")
+
+def handle_find_food_by_id(manager):
+    food_id = input_positive_int("Nhập id món ăn muốn tìm: ")
+    if food_id is None:
+        return
+    result = manager.find_food_by_id(food_id)
+    if result is None:
+        print("Không tìm thấy món ăn có id này")
+    else:
+        print("Món bạn cần tìm:")
+        result.show_info()

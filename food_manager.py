@@ -138,4 +138,10 @@ class FoodManager:
             if food.id > max_id:
                 max_id = food.id
         return max_id + 1
+    
+    def find_food_by_id(self, food_id):
+        for food in self.foods:
+            if food.id == food_id:
+                return food
+        return None
 
