@@ -21,7 +21,10 @@ class Food:
         return True
 
     def update_available(self, new_available):
+        if type(new_available) != bool:
+            return False
         self.available = new_available
+        return True
     def to_dict(self):
         return {
             "id": self.id,

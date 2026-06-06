@@ -4,7 +4,7 @@
         "name": "Phở bò",
         "price": 90000,
         "category": "Món nước",
-        "available": true
+        "available": false
     },
     {
         "id": 2,
@@ -18,7 +18,7 @@
         "name": "Bún bò",
         "price": 40000,
         "category": "Món nước",
-        "available": false
+        "available": true
     },
     {
         "id": 4,
