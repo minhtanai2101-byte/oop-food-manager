@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Phở bò",
-        "price": 80000,
+        "price": 90000,
         "category": "Món nước",
         "available": true
     },
@@ -30,7 +30,7 @@
     {
         "id": 5,
         "name": "Cháo",
-        "price": 35000,
+        "price": 30000,
         "category": "Món phụ",
         "available": false
     },

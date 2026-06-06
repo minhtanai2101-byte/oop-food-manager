@@ -15,7 +15,11 @@ class Food:
         else: 
             print("Trạng thái: Hết bán")
     def update_price(self, new_price):
+        if new_price <= 0:
+            return False
         self.price = new_price
+        return True
+
     def update_available(self, new_available):
         self.available = new_available
     def to_dict(self):

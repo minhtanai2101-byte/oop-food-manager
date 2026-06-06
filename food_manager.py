@@ -63,17 +63,15 @@ class FoodManager:
         if result is None:
             return False
         else:
-            result.update_price(new_price)
-            return True
-        
+            return result.update_price(new_price)
+                  
     def update_food_price_by_id(self, food_id, new_price):
         result = self.find_food_by_id(food_id)
         if result is None:
             return False
         else:
-            result.update_price(new_price)
-            return True
-    
+            return result.update_price(new_price)
+               
     def update_food_available(self, food_name, new_available):
         result = self.find_food(food_name)
         if result is None:
