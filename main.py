@@ -16,6 +16,8 @@ from food_actions import (
     handle_update_food_price_by_id,
     handle_update_food_available_by_id
 ) 
+from database import create_table, get_all_foods
+
 
 def print_menu(menu):
     print("----MENU QUẢN LÝ MÓN ĂN----")
@@ -24,7 +26,10 @@ def print_menu(menu):
 
 def main():
     manager = FoodManager()
-    manager.load_from_json(DATA_FILE)
+    create_table()
+    manager.foods = get_all_foods()
+
+    # manager.load_from_json(DATA_FILE)
 
     menu = ["Xem danh sách món",
             "Thêm món",

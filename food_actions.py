@@ -5,6 +5,7 @@ from input_helpers import (
     input_available,
     input_positive_int
 )
+from database import insert_food, update_food_price_in_db, update_food_available_in_db, delete_food
 
 def handle_add_food(manager):
     name = input_required_text("Nhập tên món: ", "Tên món không được để trống")
@@ -22,8 +23,10 @@ def handle_add_food(manager):
     new_id = manager.get_next_id()
     new_food = Food(new_id, name, price, category, available)
     if manager.add_food(new_food):
-        manager.save_to_json(DATA_FILE)
-        print("Đã thêm món và lưu dữ liệu")
+        insert_food(new_food)
+        print("Đã thêm món thành công")
+        #manager.save_to_json(DATA_FILE)
+        #print("Đã thêm món và lưu dữ liệu")
     else:
         print("Món bạn nhập đã có trong danh sách từ trước")
 
@@ -38,20 +41,27 @@ def handle_find_food(manager):
 
 def handle_remove_food(manager):
     food_name = input("Nhập tên món muốn xóa: ").strip()
-    if manager.remove_food(food_name):
-        manager.save_to_json(DATA_FILE)
-        print("Đã xóa món và lưu dữ liệu")
-    else:
+    result = manager.find_food(food_name)
+    if result is None:
         print("Không tìm thấy món muốn xóa")
-
+        return
+    food_id = result.id
+    if manager.remove_food(food_name):
+        result = manager.find_food(food_name)
+        delete_food(food_id)
+        #manager.save_to_json(DATA_FILE)
+        print("Đã xóa món thành công")
+    
 def handle_update_food_price(manager):
     food_name = input("Nhập tên món muốn sửa giá: ").strip()
     new_price = input_positive_int("Nhập giá: ")
     if new_price is None:
         return
     if manager.update_food_price(food_name, new_price):
-        manager.save_to_json(DATA_FILE)
-        print("Đã sửa giá món và lưu vào dữ liệu")
+        result = manager.find_food(food_name)
+        update_food_price_in_db(result.id, new_price)
+        #manager.save_to_json(DATA_FILE)
+        print("Đã sửa giá món thành công")
     else:
         print("Không tìm thấy món muốn sửa giá")
 
@@ -63,8 +73,10 @@ def handle_update_food_price_by_id(manager):
     if new_price is None:
         return
     if manager.update_food_price_by_id(food_id, new_price):
-        manager.save_to_json(DATA_FILE)
-        print("Đã sửa giá món và lưu vào dữ liệu")
+        update_food_price_in_db(food_id, new_price)
+        print("Cập nhật giá thành công")
+        #manager.save_to_json(DATA_FILE)
+        #print("Đã sửa giá món và lưu vào dữ liệu")
     else:
         print("Không tìm thấy ID món bạn muốn sửa giá")
 
@@ -75,8 +87,10 @@ def handle_update_food_available(manager):
         return
    
     if manager.update_food_available(food_name, new_available):
-        manager.save_to_json(DATA_FILE)
-        print("Đã sửa trạng thái món và lưu vào dữ liệu")
+        result = manager.find_food(food_name)
+        update_food_available_in_db(result.id, new_available)
+        #manager.save_to_json(DATA_FILE)
+        print("Đã sửa trạng thái món thành công")
     else:
         print("Không tìm thấy món muốn sửa trạng thái")
 
@@ -88,8 +102,10 @@ def handle_update_food_available_by_id(manager):
     if new_available is None:
         return
     if manager.update_food_available_by_id(food_id, new_available):
-        manager.save_to_json(DATA_FILE)
-        print("Đã sửa trạng thái món và lưu vào dữ liệu")
+        update_food_available_in_db(food_id, new_available)
+        print("Đã cập nhật trạng thái món thành công")
+        #manager.save_to_json(DATA_FILE)
+        #print("Đã sửa trạng thái món và lưu vào dữ liệu")
     else:
         print("Không tìm thấy ID món muốn sửa trạng thái")
 
@@ -182,7 +198,8 @@ def handle_remove_food_by_id(manager):
     if food_id is None:
         return
     if manager.remove_food_by_id(food_id):
-        manager.save_to_json(DATA_FILE)
-        print("Đã xóa món và lưu dữ liệu")
+        delete_food(food_id)
+        #manager.save_to_json(DATA_FILE)
+        print("Đã xóa món thành công")
     else:
         print("Không tìm thấy ID món muốn xóa")
