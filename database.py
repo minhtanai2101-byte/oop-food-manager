@@ -7,11 +7,11 @@ def create_table():
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS foods (
-        id INTERGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         name TEXT,
-        price INTERGER,
+        price INTEGER,
         category TEXT,
-        available INTERGER)
+        available INTEGER)
                 """)
     connection.commit()
     connection.close()
