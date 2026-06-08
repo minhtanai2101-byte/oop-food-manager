@@ -88,6 +88,10 @@ python main.py
 ```
 - Sau đó chọn chức năng theo menu hiển thị trên màn hình
 ### Đối với version streamlit web
+- Cài đặt thư viện cần thiết bằng lệnh:
+```bash
+py -m pip install -r requirements.txt
+```
 - Mở terminal tại thư mục project chạy:
 ```bash
 py -m streamlit run app.py
