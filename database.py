@@ -21,10 +21,9 @@ def insert_food(food):
     cursor = connection.cursor()
 
     cursor.execute("""
-    INSERT INTO foods (id, name, price, category, available)
-    VALUES (?, ? ,? ,? ,?)
+    INSERT INTO foods (name, price, category, available)
+    VALUES (?, ? ,? ,?)
     """, (
-        food.id,
         food.name,
         food.price,
         food.category,
