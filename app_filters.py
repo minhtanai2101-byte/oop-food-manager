@@ -1,7 +1,11 @@
 import streamlit as st
 from config import FOOD_CATEGORIES
 
-def filter_and_sort_foods(foods, filter_category, filter_available, sort_option):
+def filter_and_sort_foods(foods,
+                        filter_category, 
+                        filter_available, 
+                        sort_option, 
+                        search_keyword):
     display_foods = foods
 
     if filter_category != "Tất cả":
@@ -20,13 +24,23 @@ def filter_and_sort_foods(foods, filter_category, filter_available, sort_option)
             food for food in display_foods
             if food.available == False
         ]
-
+    
+    if search_keyword:
+        display_foods = [food 
+                 for food in display_foods
+                 if search_keyword.lower() in food.name.lower()]
+    
     if sort_option == "Tên A-Z":
         display_foods = sorted(display_foods, key=lambda food: food.name)
     elif sort_option == "Giá tăng dần":
         display_foods = sorted(display_foods, key=lambda food: food.price)
     elif sort_option == "Giá giảm dần":
         display_foods = sorted(display_foods, key=lambda food: food.price, reverse=True)
+    if search_keyword:
+        display_foods = [food 
+                 for food in display_foods
+                 if search_keyword.lower() in food.name.lower()]
+    
     return display_foods
 
 def show_sidebar():
@@ -56,9 +70,12 @@ def show_sidebar():
         key="sort_option"
     )
 
+    search_keyword = st.sidebar.text_input("Tìm kiếm món")
+    
+
     st.sidebar.markdown("---")
     st.sidebar.subheader("Hướng dẫn nhanh")
     st.sidebar.write("Dùng bộ lọc để tìm món cần xem.")
     st.sidebar.write("Dùng các khối bên dưới bảng để thêm, xóa hoặc sửa món.")
 
-    return filter_category, filter_available, sort_option
+    return filter_category, filter_available, sort_option, search_keyword

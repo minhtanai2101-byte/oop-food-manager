@@ -5,6 +5,8 @@
 - Hiện tại project đã có giao diện streamlit.
 - Bản CLI vẫn được giữ lại để tham khảo trong qua trình học tập, phát triển
 - Trước đây project lưu dữ liệu bằng file Json, giờ đã chuyển qua database với SQLite
+### Link demo
+https://food-manager-tan.streamlit.app
 ## 2. Công nghệ sử dụng
 - Python
 - OOP
@@ -28,13 +30,15 @@ py main.py
 py -m streamlit run app.py
 ```
 Chức năng hiện có:
+- Tự thêm dữ liệu mẫu khi database trống
 - Xem danh sách món ăn
 - Thêm món mới
 - Chặn tên món rỗng
 - Chặn giá không hợp lệ
 - Chặn món trùng tên
-- Xóa món
+- Xóa món có xác nhận
 - Sửa giá món
+- Sửa loại món
 - Sửa trạng thái còn bán / hết bán
 - Lọc theo loại món
 - Lọc theo trạng thái
@@ -75,7 +79,7 @@ app_validators.py
 → Chứa các hàm kiểm tra dữ liệu nhập
 
 app_handlers.py
-→ Chứa các hàm xử lý hành động xóa, sửa giá, sửa trạng thái
+→ Chứa các hàm xử lý hành động xóa, sửa giá, sửa loại món, sửa trạng thái
 
 app_sections.py
 → Chứa các khối giao diện thêm, xóa, sửa món

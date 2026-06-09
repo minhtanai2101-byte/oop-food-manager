@@ -1,12 +1,14 @@
 import streamlit as st
-from database import create_table, get_all_foods
+from database import create_table, get_all_foods, seed_sample_data
 from app_stats import show_food_stats
 from app_table import show_food_table
 from app_filters import show_sidebar, filter_and_sort_foods
 from app_sections import (show_add_food_section,
                           show_delete_food_section,
                           show_update_available_section,
-                          show_update_price_section)
+                          show_update_price_section,
+                          show_update_name_section,
+                          show_update_category_section)
 st.set_page_config(
     page_title="Quản lý món ăn",
     page_icon="🥗",
@@ -15,6 +17,7 @@ st.set_page_config(
 
 def main(): 
     create_table()
+    seed_sample_data()
 
     st.title("Quản lý món ăn")
     if "success_message" in st.session_state:
@@ -22,17 +25,17 @@ def main():
         del st.session_state["success_message"]
 
     foods = get_all_foods()
+    
     show_food_stats(foods)
 
-    filter_category, filter_available, sort_option = show_sidebar()
+    filter_category, filter_available, sort_option, search_keyword = show_sidebar()
 
     display_foods = filter_and_sort_foods(
         foods,
         filter_category,
         filter_available,
-        sort_option)
-
-
+        sort_option,
+        search_keyword)
     show_food_table(display_foods)
 
     st.write("---")
@@ -43,6 +46,12 @@ def main():
 
     st.write("---")
     show_update_price_section(foods)
+
+    st.write("---")
+    show_update_name_section(foods)
+
+    st.write("---")
+    show_update_category_section(foods)
 
     st.write("---")
     show_update_available_section(foods)

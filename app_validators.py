@@ -13,3 +13,11 @@ def validate_new_price(new_price):
     if new_price <= 0:
         return "Giá phải lớn hơn 0"
     return ""
+
+def validate_new_food_name(new_name, foods):
+    if new_name.strip() == "":
+        return "Tên món không được để trống"
+    for food in foods:
+        if food.name.strip().lower() == new_name.strip().lower():
+            return "Tên món đã tồn tại"
+    return ""

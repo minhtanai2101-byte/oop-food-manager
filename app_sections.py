@@ -4,7 +4,9 @@ from app_validators import validate_new_food
 from ui_helpers import get_available_text
 from app_handlers import (handle_delete_food,
                           handle_update_food_available,
-                          handle_update_food_price)
+                          handle_update_food_price,
+                          handle_update_food_name,
+                          handle_update_food_category)
 from database import insert_food
 from food import Food
 
@@ -39,9 +41,13 @@ def show_delete_food_section(foods):
                 format_func=lambda food: food.name,
                 key="select_food_for_delete"
             )
-
+            st.warning("Thao tác này sẽ xóa món khỏi database.")
+            confirm_delete = st.checkbox("Tôi chắc chắn muốn xóa món này", key="confirm_delete")
             if st.button("Xóa món"):
-                handle_delete_food(selected_food)
+                if confirm_delete == False:
+                    st.error("Bận cần xác nhận trước khi xóa")
+                else:
+                    handle_delete_food(selected_food)
 
 def show_update_price_section(foods):
     with st.expander("Sửa giá món"):
@@ -76,3 +82,27 @@ def show_update_available_section(foods):
             
             if st.button("Cập nhật trạng thái"):
                 handle_update_food_available(selected_food_for_available, new_available)
+
+def show_update_name_section(foods):
+    with st.expander("Sửa tên món"):
+        if len(foods) == 0:
+            st.warning("Chưa có món nào để sửa tên")
+        else:
+            selected_food_for_name = st.selectbox("Chọn món cần sửa tên",
+                foods, format_func=lambda food: food.name,
+                key="select_food_for_name")
+            new_name = st.text_input("Tên mới")
+            if st.button("Cập nhật tên mới"):
+                handle_update_food_name(selected_food_for_name.id, new_name, foods)
+
+def show_update_category_section(foods):
+    with st.expander("Sửa loại món"):
+        if len(foods) == 0:
+            st.warning("Chưa có món nào để sửa loại món")
+        else:
+            selected_food_for_category = st.selectbox("Chọn món cần sửa loại món",
+                foods, format_func=lambda food: food.name,
+                key="select_food_for_category")
+            new_category = st.selectbox("Loại mới",FOOD_CATEGORIES, key="select_new_category")
+            if st.button("Cập nhật loại món mới"):
+                handle_update_food_category(selected_food_for_category.id, new_category)
