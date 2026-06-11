@@ -35,7 +35,7 @@ def insert_food(food):
     connection.commit()
     cursor.close()
     connection.close()
-@st.cache_data(ttl=30)
+@st.cache_data(ttl=300)
 def get_all_foods():
     connection = get_connection()
     cursor = connection.cursor()

@@ -39,22 +39,34 @@ def main():
     show_food_table(display_foods)
 
     st.write("---")
-    show_add_food_section(foods)
+    action = st.selectbox(
+        "Chọn chức năng",
+        [
+            "Thêm món",
+            "Xóa món",
+            "Sửa giá món",
+            "Sửa tên món"
+            "Sửa loại món",
+            "Sửa trạng thái món"
+        ]
+    )
+    if action == "Thêm món":
+        show_add_food_section(foods)
 
-    st.write("---")
-    show_delete_food_section(foods)
+    elif action == "Xóa món":
+        show_delete_food_section(foods)
 
-    st.write("---")
-    show_update_price_section(foods)
+    elif action == "Sửa giá món":
+        show_update_price_section(foods)
 
-    st.write("---")
-    show_update_name_section(foods)
+    elif action == "Sửa tên món":
+        show_update_name_section(foods)
 
-    st.write("---")
-    show_update_category_section(foods)
+    elif action == "Sửa loại món":
+        show_update_category_section(foods)
 
-    st.write("---")
-    show_update_available_section(foods)
+    elif action == "Sửa trạng thái món":
+        show_update_available_section(foods)
 
 if __name__ == "__main__":
     main()
