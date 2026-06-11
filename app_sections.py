@@ -25,7 +25,7 @@ def show_add_food_section(foods):
             else:
                 new_food = Food(None, name.strip(), price, category, available)
                 insert_food(new_food)
-
+                st.cache_data.clear()
                 st.session_state["success_message"] = "Thêm món thành công!"
 
                 st.rerun()

@@ -12,16 +12,19 @@ def handle_update_food_price(selected_food, new_price):
         st.error(error)
     else:
         update_food_price_in_db(selected_food.id, new_price)
+        st.cache_data.clear()
         st.session_state["success_message"] = "Cập nhật giá thành công!"
         st.rerun()
 
 def handle_delete_food(selected_food):
     delete_food(selected_food.id)
+    st.cache_data.clear()
     st.session_state["success_message"] = "Xóa món thành công!"
     st.rerun()
 
 def handle_update_food_available(selected_food, new_available):
     update_food_available_in_db(selected_food.id, new_available)
+    st.cache_data.clear()
     st.session_state["success_message"] = "Cập nhật trạng thái thành công"
     st.rerun()
 
@@ -31,11 +34,13 @@ def handle_update_food_name(food_id, new_name, foods):
         st.error(error)
     else:
         update_food_name_in_db(food_id, new_name.strip())
+        st.cache_data.clear()
         st.session_state["success_message"] = "Sửa tên món thành công"
         st.rerun()
 
 def handle_update_food_category(food_id, new_category):
     update_food_category_in_db(food_id, new_category)
+    st.cache_data.clear()
     st.session_state["success_message"] = "Sửa loại món thành công"
     st.rerun()
 
