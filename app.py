@@ -16,8 +16,8 @@ st.set_page_config(
 )
 
 def main(): 
-    create_table()
-    seed_sample_data()
+    #create_table()
+    #seed_sample_data()
 
     st.title("Quản lý món ăn")
     if "success_message" in st.session_state:
