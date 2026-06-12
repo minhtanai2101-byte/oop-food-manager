@@ -3,8 +3,8 @@ from database import (update_food_price_in_db,
                     update_food_available_in_db,
                     delete_food,
                     update_food_name_in_db,
-                    update_food_category_in_db)
-from app_validators import validate_new_price, validate_new_food_name
+                    update_food_category_in_db, update_food_in_db)
+from app_validators import validate_new_price, validate_new_food_name, validate_update_food_name
 
 def handle_update_food_price(selected_food, new_price):
     error = validate_new_price(new_price)
@@ -42,5 +42,24 @@ def handle_update_food_category(food_id, new_category):
     update_food_category_in_db(food_id, new_category)
     st.cache_data.clear()
     st.session_state["success_message"] = "Sửa loại món thành công"
+    st.rerun()
+
+def handle_update_food(food_id, new_name, new_price, new_category, new_available, foods):
+    error = validate_update_food_name(food_id, new_name, foods)
+
+    if error != "":
+        st.error(error)
+        return
+
+    update_food_in_db(
+        food_id,
+        new_name.strip(),
+        new_price,
+        new_category,
+        new_available
+    )
+
+    st.cache_data.clear()
+    st.session_state["success_message"] = "Sửa món thành công"
     st.rerun()
 

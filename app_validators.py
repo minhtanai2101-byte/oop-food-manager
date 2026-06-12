@@ -21,3 +21,13 @@ def validate_new_food_name(new_name, foods):
         if food.name.strip().lower() == new_name.strip().lower():
             return "Tên món đã tồn tại"
     return ""
+
+def validate_update_food_name(food_id, new_name, foods):
+    if new_name.strip() == "":
+        return "Tên món không được để trống"
+
+    for food in foods:
+        if food.id != food_id and food.name.lower() == new_name.strip().lower():
+            return "Tên món đã tồn tại"
+
+    return ""

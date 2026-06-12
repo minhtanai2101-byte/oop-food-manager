@@ -132,3 +132,197 @@ def seed_sample_data():
         insert_food(food1)
         insert_food(food2)
         insert_food(food3)
+
+def get_foods_by_category(category):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT id, name, price, category, available
+        FROM foods
+        WHERE category = %s
+        """,
+        (category,))
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    foods = []
+    for row in rows:
+        food_id, name, price, category, available = row
+        food = Food(food_id, name, price, category, available)
+        foods.append(food)
+    return foods
+
+def get_foods_by_category_and_available(category, available_filter):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    sql = """
+        SELECT id, name, price, category, available
+        FROM foods
+        WHERE 1 = 1
+    """
+
+    params = []
+
+    if category != "Tất cả":
+        sql += " AND category = %s"
+        params.append(category)
+
+    if available_filter == "Còn bán":
+        sql += " AND available = %s"
+        params.append(True)
+
+    elif available_filter == "Hết bán":
+        sql += " AND available = %s"
+        params.append(False)
+
+    cursor.execute(sql, tuple(params))
+
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    foods = []
+
+    for row in rows:
+        food = Food(
+            id=row[0],
+            name=row[1],
+            price=row[2],
+            category=row[3],
+            available=row[4]
+        )
+        foods.append(food)
+
+    return foods
+
+def get_foods_by_filters(category, available_filter, search_keyword):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    sql = """
+        SELECT id, name, price, category, available
+        FROM foods
+        WHERE 1 = 1
+    """
+
+    params = []
+
+    if category != "Tất cả":
+        sql += " AND category = %s"
+        params.append(category)
+
+    if available_filter == "Còn bán":
+        sql += " AND available = %s"
+        params.append(True)
+
+    elif available_filter == "Hết bán":
+        sql += " AND available = %s"
+        params.append(False)
+
+    if search_keyword.strip() != "":
+        sql += " AND name ILIKE %s"
+        params.append(f"%{search_keyword.strip()}%")
+
+    cursor.execute(sql, tuple(params))
+
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    foods = []
+
+    for row in rows:
+        food = Food(
+            id=row[0],
+            name=row[1],
+            price=row[2],
+            category=row[3],
+            available=row[4]
+        )
+        foods.append(food)
+
+    return foods
+
+def get_foods_by_filters(category, available_filter, search_keyword, sort_option):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    sql = """
+        SELECT id, name, price, category, available
+        FROM foods
+        WHERE 1 = 1
+    """
+
+    params = []
+
+    if category != "Tất cả":
+        sql += " AND category = %s"
+        params.append(category)
+
+    if available_filter == "Còn bán":
+        sql += " AND available = %s"
+        params.append(True)
+
+    elif available_filter == "Hết bán":
+        sql += " AND available = %s"
+        params.append(False)
+
+    if search_keyword.strip() != "":
+        sql += " AND name ILIKE %s"
+        params.append(f"%{search_keyword.strip()}%")
+
+    if sort_option == "Tên A-Z":
+        sql += " ORDER BY name ASC"
+    
+    elif sort_option == "Giá tăng dần":
+        sql += " ORDER BY price ASC"
+
+    elif sort_option == "Giá giảm dần":
+        sql += " ORDER BY price DESC"
+
+    cursor.execute(sql, tuple(params))
+
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    foods = []
+
+    for row in rows:
+        food = Food(
+            id=row[0],
+            name=row[1],
+            price=row[2],
+            category=row[3],
+            available=row[4]
+        )
+        foods.append(food)
+
+    return foods
+
+def update_food_in_db(food_id, new_name, new_price, new_category, new_available):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE foods
+        SET name = %s,
+            price = %s,
+            category = %s,
+            available = %s
+        WHERE id = %s
+        """,
+        (new_name, new_price, new_category, new_available, food_id)
+    )
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()

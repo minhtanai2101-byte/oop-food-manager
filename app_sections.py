@@ -6,7 +6,7 @@ from app_handlers import (handle_delete_food,
                           handle_update_food_available,
                           handle_update_food_price,
                           handle_update_food_name,
-                          handle_update_food_category)
+                          handle_update_food_category, handle_update_food)
 from database import insert_food
 from food import Food
 
@@ -116,3 +116,58 @@ def show_update_category_section(foods):
                 submitted = st.form_submit_button("Cập nhật loại món mới")
                 if submitted:
                     handle_update_food_category(selected_food_for_category.id, new_category)
+
+def show_update_food_section(foods):
+    st.subheader("Sửa món")
+
+    if len(foods) == 0:
+        st.info("Chưa có món nào để sửa")
+        return
+
+    food_options = {}
+
+    for food in foods:
+        food_options[f"{food.id} - {food.name}"] = food
+
+    selected_food_label = st.selectbox(
+        "Chọn món muốn sửa",
+        list(food_options.keys())
+    )
+
+    selected_food = food_options[selected_food_label]
+
+    with st.form("update_food_form"):
+        new_name = st.text_input(
+            "Tên món",
+            value=selected_food.name
+        )
+
+        new_price = st.number_input(
+            "Giá món",
+            min_value=0,
+            step=1000,
+            value=selected_food.price
+        )
+
+        new_category = st.selectbox(
+            "Loại món",
+            FOOD_CATEGORIES,
+            index=FOOD_CATEGORIES.index(selected_food.category)
+        )
+
+        new_available = st.checkbox(
+            "Còn bán",
+            value=selected_food.available
+        )
+
+        submitted = st.form_submit_button("Lưu thay đổi")
+
+        if submitted:
+            handle_update_food(
+                selected_food.id,
+                new_name,
+                new_price,
+                new_category,
+                new_available,
+                foods
+            )

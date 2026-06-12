@@ -1,5 +1,6 @@
 import streamlit as st
-from database import create_table, get_all_foods, seed_sample_data
+from database import get_foods_by_filters, get_all_foods, get_foods_by_category, get_foods_by_category_and_available
+from config import FOOD_CATEGORIES
 from app_stats import show_food_stats
 from app_table import show_food_table
 from app_filters import show_sidebar, filter_and_sort_foods
@@ -8,7 +9,7 @@ from app_sections import (show_add_food_section,
                           show_update_available_section,
                           show_update_price_section,
                           show_update_name_section,
-                          show_update_category_section)
+                          show_update_category_section, show_update_food_section)
 st.set_page_config(
     page_title="Quản lý món ăn",
     page_icon="🥗",
@@ -24,19 +25,26 @@ def main():
         st.success(st.session_state["success_message"])
         del st.session_state["success_message"]
 
-    foods = get_all_foods()
+    #foods = get_all_foods()
+    filter_category, filter_available, sort_option, search_keyword = show_sidebar()
+    foods = get_foods_by_filters(
+    filter_category,
+    filter_available,
+    search_keyword,
+    sort_option)
+    
     
     show_food_stats(foods)
 
-    filter_category, filter_available, sort_option, search_keyword = show_sidebar()
+    #filter_category, filter_available, sort_option, search_keyword = show_sidebar()
 
-    display_foods = filter_and_sort_foods(
-        foods,
-        filter_category,
-        filter_available,
-        sort_option,
-        search_keyword)
-    show_food_table(display_foods)
+    #display_foods = filter_and_sort_foods(
+    #    foods,
+     #   filter_category,
+      #  filter_available,
+       # sort_option,
+        #search_keyword)
+    show_food_table(foods)
 
     st.write("---")
     action = st.selectbox(
@@ -44,10 +52,7 @@ def main():
         [
             "Thêm món",
             "Xóa món",
-            "Sửa giá món",
-            "Sửa tên món"
-            "Sửa loại món",
-            "Sửa trạng thái món"
+            "Sửa món"
         ]
     )
     if action == "Thêm món":
@@ -67,6 +72,9 @@ def main():
 
     elif action == "Sửa trạng thái món":
         show_update_available_section(foods)
+    
+    elif action == "Sửa món":
+        show_update_food_section(foods)
 
 if __name__ == "__main__":
     main()
