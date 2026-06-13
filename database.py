@@ -326,3 +326,67 @@ def update_food_in_db(food_id, new_name, new_price, new_category, new_available)
 
     cursor.close()
     connection.close()
+
+def import_foods_from_df(df):
+    connection = get_connection()
+    cursor = connection.cursor()
+    imported_count = 0
+    for _, row in df.iterrows():
+
+        name = str(row["Tên món"]).strip()
+
+        price = int(row["Giá"])
+
+        category = str(row["Loại món"]).strip()
+
+        available = (
+            str(row["Trạng thái"]).strip()
+            == "Còn bán"
+        )
+
+        #cursor.execute("""
+        #SELECT id
+        #FROM foods
+        #WHERE name = %s
+        #""", (name,))
+
+        #existing_food = cursor.fetchone()
+        #if existing_food:
+        #    continue
+        
+        
+        
+        # đã thêm constraint unique name 
+        cursor.execute(
+            """
+            INSERT INTO foods
+            (
+                name,
+                price,
+                category,
+                available
+            )
+            VALUES
+            (
+                %s,
+                %s,
+                %s,
+                %s
+            )
+            ON CONFLICT (name)
+            DO NOTHING
+            """,
+            (
+                name,
+                price,
+                category,
+                available
+            )
+        )
+        if cursor.rowcount == 1:
+            imported_count += 1
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+    return imported_count
